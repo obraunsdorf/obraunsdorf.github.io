@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ensuring Memory Safety for the Transition from C/C&#43;&#43; to Rust | </title>
+<meta name="keywords" content="" />
+<meta name="description" content="Presentation recordings, slides and conference poster">
+<meta name="author" content="">
+<link rel="canonical" href="https://obraunsdorf.dev/talks/safeffi/" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKNXYM2DRM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EKNXYM2DRM');
+</script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a9d03b93f465f581a1d22dc8a98d36bb5a5055810de2090c66bc5d9124cf4d03.css" integrity="sha256-qdA7k/Rl9YGh0i3IqY02u1pQVYEN4gkMZrxdkSTPTQM=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.27cd435cc9ed6abb4b496581b151804f79f366c412620272bb94e2f5f598ebcc.js" integrity="sha256-J81DXMntartLSWWBsVGAT3nzZsQSYgJyu5Ti9fWY68w="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://obraunsdorf.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://obraunsdorf.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://obraunsdorf.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://obraunsdorf.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://obraunsdorf.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class=" dark" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <span class="logo-switches">
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="/" title="Home"><span>Home</span></a>
+            </li>
+            <li>
+                <a href="https://obraunsdorf.dev/research/" title="Research">
+                    <span>Research</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://obraunsdorf.dev/talks/" title="Talks &amp; Publications">
+                    <span>Talks &amp; Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://obraunsdorf.dev/documents/cv.pdf" title="CV">
+                    <span>CV</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Ensuring Memory Safety for the Transition from C/C&#43;&#43; to Rust
+    </h1>
+    <div class="post-description">
+      Presentation recordings, slides and conference poster
+    </div>
+    <div class="post-meta"></div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#motivation" aria-label="Motivation">Motivation</a></li>
+                <li>
+                    <a href="#published-poster-at-ndss-2024" aria-label="Published Poster at NDSS 2024">Published Poster at NDSS 2024</a></li>
+                <li>
+                    <a href="#presentation-2023-10-17-galois-tech-talk-series" aria-label="Presentation 2023-10-17: Galois Tech Talk Series">Presentation 2023-10-17: Galois Tech Talk Series</a></li>
+                <li>
+                    <a href="#presentation-2023-09-05-rust-munich-meetup" aria-label="Presentation 2023-09-05: Rust Munich Meetup">Presentation 2023-09-05: Rust Munich Meetup</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content">
+  <h2 id="motivation">Motivation</h2>
+<p>Re-writing or porting existing software to a new programming language in a whole can be a costly venture for companies and organizations.
+Therefore, it might be more feasible to gradually replace C/C++ code by Rust code and perform the language transition step-by-step.
+Fortunately, Rust has built-in support for interoperability with C using the <a href="https://doc.rust-lang.org/nomicon/ffi.html">Foreign Function Interface (FFI)</a>.
+This allows Rust functions to be integrated in C/C++ code bases or vice versa.<br>
+However, exchanging data structures over this language boundary is prone to memory-safety issues&mdash;as shown, e.g., by Li et al.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and Mergendahl et al.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <!-- raw HTML omitted -->
+To counter those issues, I research ideas to prevent memory-safety vulnerabilities in mixed language binaries.<br>
+I developed a concept that utilizes <a href="https://en.wikipedia.org/wiki/Code_sanitizer">memory-safety sanitizers</a> to introduce additional security checks for only those memory objects which are passed over the <em>unsafe</em> language boundary between C/C++ and Rust&mdash;while memory objects which are only used in <em>safe</em> Rust code (and whose memory safety can be proven by the Rust compiler) are omitted from additional security checks.<br>
+This allows for building memory-safe mixed-language programs with only minimized performance overhead. And it comes with a great incentive: the more C/C++ functions you replace by safe Rust code, the less performance overhead is introduced.<br>
+Currently, I work on two PoC memory-safety sanitizers implemented in the LLVM Compiler Framework that are able to interact with a modified Rust compiler to exchange size and lifetime information of memory objects that are passed over language boundaries.<br>
+I am looking forward to publish my research prototypes and results soon.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="published-poster-at-ndss-2024">Published Poster at NDSS 2024</h2>
+<p>I created a poster and a 2-page extended abstract of my current state of research which was accepted at NDSS 2024.
+I will be in San Diego from Feb. 26th - Mar 1st to present this at the conference and will be happy to talk about my findings and get feedback.</p>
+<ul>
+<li><strong><a href="/documents/2024-02-08_NDSS-CameraReady_SafeFFI-Poster-Abstract_OliverBraunsdorf.pdf">Poster + Abstract</a></strong></li>
+</ul>
+<h2 id="presentation-2023-10-17-galois-tech-talk-series">Presentation 2023-10-17: Galois Tech Talk Series</h2>
+<p><a href="https://galois.com/">Galois Inc.</a> invited me to give a presentation as part of their tech talks in October 2023.</p>
+<ul>
+<li><strong><a href="/documents/2023-10-17_SafeFFI_GaloisTechTalk.pdf">Slides</a></strong></li>
+<li><strong>Recording: to be published</strong></li>
+</ul>
+<h2 id="presentation-2023-09-05-rust-munich-meetup">Presentation 2023-09-05: Rust Munich Meetup</h2>
+<p>I was happy to present preliminary results of my research prototype at the Rust Munich Meetup in September 2023.</p>
+<ul>
+<li><strong><a href="https://www.youtube.com/live/JPrhgZMvS0A?si=A6o0RN2mf3sAAJat&amp;t=5783">Recording</a></strong></li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Li, Z., Wang, J., Sun, M., Lui, J.C.S. (2022). Detecting Cross-language Memory Management Issues in Rust. In: Atluri, V., Di Pietro, R., Jensen, C.D., Meng, W. (eds) Computer Security – ESORICS 2022. ESORICS 2022. Lecture Notes in Computer Science, vol 13556. Springer, Cham. <a href="https://doi.org/10.1007/978-3-031-17143-7_33">https://doi.org/10.1007/978-3-031-17143-7_33</a>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Mergendahl, Samuel, Nathan Burow, und Hamed Okhravi. „Cross-Language Attacks“. In Proceedings 2022 Network and Distributed System Security Symposium. San Diego, CA, USA: Internet Society, 2022. <a href="https://doi.org/10.14722/ndss.2022.24078">https://doi.org/10.14722/ndss.2022.24078</a>. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+  </div>
+
+  <footer class="post-footer">
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
