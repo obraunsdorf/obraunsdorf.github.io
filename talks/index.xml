@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Talks &amp; Publications on </title>
+    <link>https://obraunsdorf.dev/talks/</link>
+    <description>Recent content in Talks &amp; Publications on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://obraunsdorf.dev/talks/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ensuring Memory Safety for the Transition from C/C&#43;&#43; to Rust</title>
+      <link>https://obraunsdorf.dev/talks/safeffi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://obraunsdorf.dev/talks/safeffi/</guid>
+      <description>Motivation Re-writing or porting existing software to a new programming language in a whole can be a costly venture for companies and organizations. Therefore, it might be more feasible to gradually replace C/C++ code by Rust code and perform the language transition step-by-step. Fortunately, Rust has built-in support for interoperability with C using the Foreign Function Interface (FFI). This allows Rust functions to be integrated in C/C++ code bases or vice versa.</description>
+    </item>
+    
+    <item>
+      <title>Resilient CFI: Compiler-based Attack Origin Tracking with Dynamic Taint Analysis</title>
+      <link>https://obraunsdorf.dev/talks/recfi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://obraunsdorf.dev/talks/recfi/</guid>
+      <description>Paper https://link.springer.com/chapter/10.1007/978-3-031-08896-4_9
+Talk at ICISC 2021 I presented our results in a hybrid conference at ICISC. Here is the pre-recorded video and the slides.
+ Slides: to be published Recording: to be published  </description>
+    </item>
+    
+    <item>
+      <title>Olympic Flag Football: Systems, Tactics, and Benefits for the Development of Tackle Football Players and Clubs</title>
+      <link>https://obraunsdorf.dev/talks/2023-02-24_bcc_olympicflagfootball/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://obraunsdorf.dev/talks/2023-02-24_bcc_olympicflagfootball/</guid>
+      <description>BCC 2023 Team Germany&amp;rsquo;s offensive coordinator, Hauke Bastert, and I presented recent developments in Flag Football&amp;mdash;in Germany and internationally&amp;mdash;and our learnings from the past few seasons regarding how the game&amp;rsquo;s strategies evolved.
+We also interviewed many known national and international athletes who both play Flag Football and Tackle Football to answer the question: How does playing both Flag and Tackle at the same time benefit the skill development of athletes?</description>
+    </item>
+    
+  </channel>
+</rss>

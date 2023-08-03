@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://obraunsdorf.dev/talks/safeffi/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://obraunsdorf.dev/talks/recfi/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://obraunsdorf.dev/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://obraunsdorf.dev/unsubscribe/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://obraunsdorf.dev/talks/2023-02-24_bcc_olympicflagfootball/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://obraunsdorf.dev/research/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://obraunsdorf.dev/talks/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  
+</urlset>

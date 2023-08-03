@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Research | </title>
+<meta name="keywords" content="" />
+<meta name="description" content="Research Interests My main field of interest is software security, including secure software design, memory safety, static program analysis and program instrumentation. These interests manifest mainly in work with the LLVM compiler framework and the Rust programming language&lsquo;s compiler. I&rsquo;m driven to create methods to enabele a secure step-by-step transition from unsafe languages like C/C&#43;&#43; to memory-safe languages, primarily Rust.
+Since the beginning of my PhD, I have been very attracted to Rust because of its type system, especially with the Ownership &amp; Borrowing concepts.">
+<meta name="author" content="">
+<link rel="canonical" href="https://obraunsdorf.dev/research/" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKNXYM2DRM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EKNXYM2DRM');
+</script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a9d03b93f465f581a1d22dc8a98d36bb5a5055810de2090c66bc5d9124cf4d03.css" integrity="sha256-qdA7k/Rl9YGh0i3IqY02u1pQVYEN4gkMZrxdkSTPTQM=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.27cd435cc9ed6abb4b496581b151804f79f366c412620272bb94e2f5f598ebcc.js" integrity="sha256-J81DXMntartLSWWBsVGAT3nzZsQSYgJyu5Ti9fWY68w="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://obraunsdorf.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://obraunsdorf.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://obraunsdorf.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://obraunsdorf.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://obraunsdorf.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class=" dark" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <span class="logo-switches">
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="/" title="Home"><span>Home</span></a>
+            </li>
+            <li>
+                <a href="https://obraunsdorf.dev/research/" title="Research">
+                    <span class="active">Research</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://obraunsdorf.dev/talks/" title="Talks &amp; Publications">
+                    <span>Talks &amp; Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://obraunsdorf.dev/documents/cv.pdf" title="CV">
+                    <span>CV</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Research
+    </h1>
+    <div class="post-meta"></div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#research-interests" aria-label="Research Interests">Research Interests</a></li>
+                <li>
+                    <a href="#research-projects" aria-label="Research Projects">Research Projects</a></li>
+                <li>
+                    <a href="#supervised-thesis-projects" aria-label="Supervised Thesis Projects">Supervised Thesis Projects</a></li>
+                <li>
+                    <a href="#teaching-seminars-at-lmu-university-of-munich-and-tu-munich" aria-label="Teaching Seminars at LMU University of Munich and TU Munich">Teaching Seminars at LMU University of Munich and TU Munich</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content">
+  <h2 id="research-interests">Research Interests</h2>
+<p>My main field of interest is software security, including secure software design, memory safety, static program analysis and program instrumentation. These interests manifest mainly in work with the <a href="https://llvm.org/">LLVM compiler</a> framework and the <a href="https://www.rust-lang.org/">Rust programming language</a>&lsquo;s compiler. I&rsquo;m driven to create methods to enabele a secure step-by-step transition from unsafe languages like C/C++ to memory-safe languages, primarily Rust.</p>
+<p>Since the beginning of my PhD, I have been very attracted to Rust because of its type system, especially with the <a href="https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html">Ownership &amp; Borrowing</a> concepts. It allows writing <a href="https://www.memorysafety.org/docs/memory-safety/">memory-safe</a> programs&mdash;even for low-level high-performance targets since it works without garbage collection. By implementing this linear (or more precisely <a href="https://en.wikipedia.org/wiki/Substructural_type_system#Affine_type_systems">affine</a>) type system, Rust also restricts <a href="https://en.wikipedia.org/wiki/Aliasing_(computing)">pointer aliasing</a>, enabling precise AND scalable <a href="https://en.wikipedia.org/wiki/Pointer_analysis">alias analyses</a>. This makes Rust programs a prime case for static analyses, e.g., for Information Flow Control (IFC). <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>What motivates me to implement security features inside of compilers is that it helps the adoption of software security because, for software developers, it can be as easy as activating a compiler flag. Security has always been seen as an additional burden to software developers. That is why security mechanisms must be designed to lower the entry barrier for software developers who just want to focus on implementing their product.</p>
+<!-- raw HTML omitted -->
+<p>Other topics I am interested in:</p>
+<ul>
+<li>Application of advanced program analysis techniques and formal methods, e.g., model checking, abstract interpretation, symbolic execution</li>
+<li>Memory Safety &amp; Control Flow Integrity (CFI)</li>
+<li>Secure software and systems architecture</li>
+<li>Secure microkernels and operating systems</li>
+<li>Programming language design &amp; domain-specific languages</li>
+</ul>
+<h2 id="research-projects">Research Projects</h2>
+<p><strong><a href="../talks/safeffi">↬ Memory-Safety for Mixed-Language Binaries (Rust &amp; C/C++)</a></strong></p>
+<p><strong><a href="https://github.com/International-Data-Spaces-Association/idscp2-rust">↬ Specification, Design, Implementing, and Model Checking of the IDS Communication Protocol</a></strong></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="supervised-thesis-projects">Supervised Thesis Projects</h2>
+<p><strong>Detecting Numeric Operations Threatening Memory Safety in Rust</strong><br>
+Combining symbolic execution and static dataflow analysis on LLVM IR to find integer overflows and
+similar arithmetic errors in Rust programs whose results can cause memory-safety violations.</p>
+<p><strong>Minimal Runtime in Rust for seL4-based Confidential Computing VMs</strong><br>
+Runtime environment for trusted services written in Rust on top of the seL4 kernel, based on Google’s CantripOS. During provision, the trusted service binary is encrypted. Upon VM startup, the runtime environment dynamically decrypts the trusted service after successful remote attestation and executes it as an seL4 task.</p>
+<p><strong>Automatic Compartmentalization of Rust Programs to Simplify Software Development with AMD SEV</strong><br>
+Semi-automatic splitting of Rust programs into security-critical and non-critical binaries with
+function calls between the compartments automatically replaced by RPC calls.</p>
+<p><strong>A Dataflow Engine for Rust: Analyzing Security Critical Programs</strong><br>
+Static whole-program dataflow analysis implemented on the Rust compiler’s middle intermediate
+representation (MIR).</p>
+<p><strong>A Systematic Approach to Gradually Integrate Rust into Existing Codebases</strong><br>
+Guidelines to systematically replace parts of C/C++ code by Rust code in existing software projects.</p>
+<p><strong>Attack Path Tracing with Dynamic Dataflow Analysis</strong><br>
+Combining Control Flow Integrity with Dynamic Taint Tracking to trace back the origin of the attack,
+e.g., to network packets or commandline input.</p>
+<h2 id="teaching-seminars-at-lmu-university-of-munich-and-tu-munich">Teaching Seminars at LMU University of Munich and TU Munich</h2>
+<ul>
+<li>Software Hardening (2024)</li>
+<li>Software Security Analysis (2020-2022)</li>
+<li>Security Concepts of Selected OS-Kernels (2020)</li>
+<li>Linux Security – Kernel Features and Attack Vectors (2018)</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Balasubramanian, A., Baranowski, M. S., Burtsev, A., Panda, A., Rakamarić, Z., &amp; Ryzhyk, L. (2017). System programming in rust: Beyond safety. In Proceedings of the 16th workshop on hot topics in operating systems (pp. 156-161). <a href="https://doi.org/10.1145/3102980.3103006">https://doi.org/10.1145/3102980.3103006</a>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+  </div>
+
+  <footer class="post-footer">
+  </footer>
+</article>
+    </main>
+    
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
